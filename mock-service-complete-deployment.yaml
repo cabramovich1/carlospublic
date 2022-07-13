@@ -1,0 +1,74 @@
+# This creates the name space in which all the resources bellow will be deployed
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dvwa-and-mock
+---
+# This is a secret for the docker registry to be able to pull private images
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJsaXphdHdpc3Rsb2NrIiwicGFzc3dvcmQiOiJQYSQkd29yZDEhIiwiZW1haWwiOiJsbGVjaHRtYW5AcGFsb2FsdG9uZXR3b3Jrcy5jb20iLCJhdXRoIjoiYkdsNllYUjNhWE4wYkc5amF6cFFZU1FrZDI5eVpERWgifX19
+kind: Secret
+metadata:
+  name: mockservice-secret
+  namespace: dvwa-and-mock
+type: kubernetes.io/dockerconfigjson
+---
+# This creates the deployment that will be responsible to make sure that the POD you created, will always be up, kubernetes monitors it's state and in case of need, recreates the POD after pod or node failure.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mock-service
+  name: mock-service
+  namespace: dvwa-and-mock
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mock-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mock-service
+    spec:
+    #Insures that this app will run on linux nodes only (the only OS it can run on)
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+      containers:
+      - image: lizatwistlock/waas-mock-service:latest
+        imagePullPolicy: Always
+        name: waas-mock-service
+        ports:
+          - containerPort: 8081
+            name: mock-service
+         
+        # The secret we created previously is referenced here, in order to use it for the image pull from Docker registry
+        imagePullSecrets:
+        - name: mockservice-secret
+---
+# This creates the service through which the application is exposed to the world / or the cluster (traffic is forwarded to the service, and then reaches the pod)
+apiVersion: v1
+kind: Service
+metadata:
+  name: mock-service
+  namespace: dvwa-and-mock
+spec:
+  selector:
+    app: mock-service
+  ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+  type: NodePort
+  #type: LoadBalancer
