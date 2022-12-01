@@ -1,7 +1,0 @@
-FROM python:alpine
-ENV  APP_USER="1admin2"
-ENV  APP_PASSWORD="M8%9SrK#qb2kguVG"
-COPY server.py server.py
-EXPOSE 8080
-ENTRYPOINT /server.py -a True -u ${APP_USER} -p ${APP_PASSWORD} -P 8080
-
