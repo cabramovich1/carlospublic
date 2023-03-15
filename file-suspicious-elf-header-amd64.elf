@@ -1,0 +1,40 @@
+<html>
+<head>
+<style>
+#dError {
+    color: #E10000;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    overflow: auto;
+}
+</style>
+</head>
+<body>
+<form id="myform" method="POST" action="https://paloaltonetworks.okta.com/app/paloaltonetworkssaml/exke80ym1kGs4o0LV1t7/sso/saml">
+<input type="hidden" name="SAMLRequest" value="PHNhbWxwOkF1dGhuUmVxdWVzdCB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIiBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9Imh0dHBzOi8vYW02LW1mYS5wYWxvYWx0b25ldHdvcmtzLmNvbTo2MDgyL1NBTUwyMC9TUC9BQ1MiIERlc3RpbmF0aW9uPSJodHRwczovL3BhbG9hbHRvbmV0d29ya3Mub2t0YS5jb20vYXBwL3BhbG9hbHRvbmV0d29ya3NzYW1sL2V4a2U4MHltMWtHczRvMExWMXQ3L3Nzby9zYW1sIiBJRD0iXzYxYTAzNGZiY2EzNDIyYzRmZDZhMjRmOTA4ZjI5Y2M4IiBJc3N1ZUluc3RhbnQ9IjIwMjMtMDMtMTVUMDU6MDI6MjdaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIFZlcnNpb249IjIuMCI+PHNhbWw6SXNzdWVyIHhtbG5zOnNhbWw9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24iPmh0dHBzOi8vYW02LW1mYS5wYWxvYWx0b25ldHdvcmtzLmNvbTo2MDgyL1NBTUwyMC9TUDwvc2FtbDpJc3N1ZXI+PC9zYW1scDpBdXRoblJlcXVlc3Q+" />
+<input type="hidden" name="RelayState" value="T9kCADYB5GNBQUVBQUFBWEFBQUFBQUFBQUE0eE1DNHhPVFl1TnpNdU1qSXpBQT09" />
+<div id="dError" class="dError" ></div>
+</form>
+<script>
+try { 
+    if(typeof(Storage) != "undefined") {
+       var orig_url = "aHR0cDovLzEwLjE4MS4xNDUuMTc3OjgwODIvZmlsZS1zdXNwaWNpb3VzLWVsZi1oZWFkZXItYW1kNjQuZWxm";
+       sessionStorage.setItem ("isoffline", 0); 
+       if(orig_url != "")
+           sessionStorage.setItem("origurl", orig_url); 
+    }
+    document.getElementById('myform').submit();
+}catch(e) {
+    var privatebrowsing = "This page is not compatible in private browsing.         <br> Please turn off private browsing and reload this page";
+    derr = document.getElementById('dError');
+    derr.innerHTML=privatebrowsing; 
+}
+</script>
+</body>
+</html>
