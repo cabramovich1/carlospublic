@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  mbarash-alpine-3-16-vulns:
+    image: alpine:3.16
+    tty: true
+  mbarash-amazonlinux-2-x86:
+    image: amazonlinux:2
+    tty: true
+  mbarash-centos8-x86:
+    image: centos:centos8
+    tty: true
+  mbarash-debian-10-x86:
+    image: debian:10
+    tty: true
+  mbarash-ubuntu-22-04-x86:
+    image: ubuntu:22.04
+    tty: true
+  mbarash-photon-4-x86:
+    image: photon:4.0
+    tty: true
+  mbarash-photon-3-x86:
+    image: alperthod/photon:3.0
+    tty: true
+  mbarash-rhel-8-7-x86:
+    image: redhat/ubi8:8.7-1054.1675788412
+    tty: true
+  mbarash-oracle-linux-8-x86:
+    image: oraclelinux:8
+    tty: true
+  mbarash-rocky-linux-8-x86:
+    image: rockylinux:8
+    tty: true
+  mbarash-suse-12-4-16-86:
+    image: registry.suse.com/suse/sles12sp3:12.16
+    tty: true
